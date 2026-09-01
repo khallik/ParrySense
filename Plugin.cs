@@ -88,7 +88,7 @@ public class Plugin : BaseUnityPlugin
         _harmony.PatchAll();
 
         Logger.LogInfo(
-            $"ParryTrainer {MyPluginInfo.PLUGIN_VERSION} loaded"
+            $"ParrySense {MyPluginInfo.PLUGIN_VERSION} loaded"
         );
     }
 
@@ -114,7 +114,7 @@ public class Plugin : BaseUnityPlugin
                     : "disabled";
 
             Logger.LogInfo(
-                $"ParryTrainer {state}"
+                $"ParrySense {state}"
             );
         }
 
@@ -149,14 +149,14 @@ public class Plugin : BaseUnityPlugin
             "General",
             "Enabled",
             true,
-            "Enable or disable ParryTrainer."
+            "Enable or disable ParrySense."
         );
 
         _toggleKey = Config.Bind(
             "General",
             "ToggleKey",
             new KeyboardShortcut(KeyCode.F8),
-            "Keyboard shortcut used to enable or disable ParryTrainer."
+            "Keyboard shortcut used to enable or disable ParrySense."
         );
 
         _positionX = Config.Bind(

@@ -4,15 +4,28 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>ParrySense</AssemblyName>
     <Product>ParrySense</Product>
+    <RootNamespace>ParrySense</RootNamespace>
     <Version>0.1.0</Version>
+
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
+
     <RestoreAdditionalProjectSources>
       https://api.nuget.org/v3/index.json;
       https://nuget.bepinex.dev/v3/index.json;
       https://nuget.samboy.dev/v3/index.json
     </RestoreAdditionalProjectSources>
-    <RootNamespace>ParrySense</RootNamespace>
+
+    <!--
+      Local development paths.
+      Define these as environment variables or MSBuild properties:
+        VALHEIM_MANAGED_PATH = ...\Valheim\valheim_Data\Managed
+        BEPINEX_CORE_PATH     = ...\BepInEx\core
+
+      No user-specific absolute paths are committed to the repository.
+    -->
+    <ValheimManagedPath Condition="'$(ValheimManagedPath)' == ''">$(VALHEIM_MANAGED_PATH)</ValheimManagedPath>
+    <BepInExCorePath Condition="'$(BepInExCorePath)' == ''">$(BEPINEX_CORE_PATH)</BepInExCorePath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -32,19 +45,28 @@
   </ItemGroup>
 
   <ItemGroup>
- 
     <!-- Valheim -->
     <Reference Include="assembly_valheim">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Valheim\valheim_Data\Managed\assembly_valheim.dll</HintPath>
+      <HintPath>$(ValheimManagedPath)\assembly_valheim.dll</HintPath>
       <Private>false</Private>
     </Reference>
 
-    <!-- Harmony fourni directement par BepInExPack -->
+    <!-- Harmony supplied by the local BepInExPack installation -->
     <Reference Include="0Harmony">
-      <HintPath>C:\Users\Shadow\AppData\Roaming\r2modmanPlus-local\Valheim\profiles\Papagaming2026-QoL\BepInEx\core\0Harmony.dll</HintPath>
+      <HintPath>$(BepInExCorePath)\0Harmony.dll</HintPath>
       <Private>false</Private>
     </Reference>
-
   </ItemGroup>
+
+  <Target Name="ValidateLocalReferences" BeforeTargets="ResolveReferences">
+    <Error Condition="'$(ValheimManagedPath)' == ''"
+           Text="VALHEIM_MANAGED_PATH (or MSBuild property ValheimManagedPath) is not set." />
+    <Error Condition="'$(BepInExCorePath)' == ''"
+           Text="BEPINEX_CORE_PATH (or MSBuild property BepInExCorePath) is not set." />
+    <Error Condition="!Exists('$(ValheimManagedPath)\assembly_valheim.dll')"
+           Text="assembly_valheim.dll was not found at '$(ValheimManagedPath)\assembly_valheim.dll'." />
+    <Error Condition="!Exists('$(BepInExCorePath)\0Harmony.dll')"
+           Text="0Harmony.dll was not found at '$(BepInExCorePath)\0Harmony.dll'." />
+  </Target>
 
 </Project>
