@@ -1,0 +1,9 @@
+{
+  "name": "ParrySense",
+  "version_number": "0.1.0",
+  "website_url": "https://github.com/khallik/ParrySense",
+  "description": "A client-side parry training tool for Valheim that provides post-impact timing feedback without changing combat mechanics.",
+  "dependencies": [
+    "denikson-BepInExPack_Valheim-5.4.2333"
+  ]
+}
