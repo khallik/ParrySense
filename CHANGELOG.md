@@ -1,6 +1,11 @@
 \# Changelog
 
+\## 0.1.1
 
+\### Changed
+
+- Simplified the Thunderstore/r2modman README for better readability.
+- Removed unnecessary promotional wording from the package presentation.
 
 \## 0.1.0
 
