@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>ParrySense</AssemblyName>
+    <Product>ParrySense</Product>
+    <Version>0.1.0</Version>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>latest</LangVersion>
+    <RestoreAdditionalProjectSources>
+      https://api.nuget.org/v3/index.json;
+      https://nuget.bepinex.dev/v3/index.json;
+      https://nuget.samboy.dev/v3/index.json
+    </RestoreAdditionalProjectSources>
+    <RootNamespace>ParrySense</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BepInEx.Analyzers"
+                      Version="1.*"
+                      PrivateAssets="all" />
+
+    <PackageReference Include="BepInEx.Core"
+                      Version="5.*" />
+
+    <PackageReference Include="BepInEx.PluginInfoProps"
+                      Version="2.*" />
+
+    <PackageReference Include="UnityEngine.Modules"
+                      Version="6000.0.7"
+                      IncludeAssets="compile" />
+  </ItemGroup>
+
+  <ItemGroup>
+ 
+    <!-- Valheim -->
+    <Reference Include="assembly_valheim">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Valheim\valheim_Data\Managed\assembly_valheim.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+
+    <!-- Harmony fourni directement par BepInExPack -->
+    <Reference Include="0Harmony">
+      <HintPath>C:\Users\Shadow\AppData\Roaming\r2modmanPlus-local\Valheim\profiles\Papagaming2026-QoL\BepInEx\core\0Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+
+  </ItemGroup>
+
+</Project>
